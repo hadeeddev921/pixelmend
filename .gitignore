@@ -1,0 +1,12 @@
+.DS_Store
+**/__pycache__
+examples/
+.idea/
+.vscode/
+build
+!pixelmend/app/build
+dist/
+pixelmend.egg-info/
+venv/
+tmp/
+pixelmend/web_app/
