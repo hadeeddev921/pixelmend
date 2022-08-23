@@ -3,6 +3,7 @@ from .lama import LaMa, AnimeLaMa
 from .ldm import LDM
 from .manga import Manga
 from .mat import MAT
+from .mi_gan import MIGAN
 from .opencv2 import OpenCV2
 from .zits import ZITS
 
@@ -15,4 +16,5 @@ models = {
     FcF.name: FcF,
     OpenCV2.name: OpenCV2,
     Manga.name: Manga,
+    MIGAN.name: MIGAN,
 }
