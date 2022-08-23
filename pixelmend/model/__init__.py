@@ -1,3 +1,4 @@
+from .fcf import FcF
 from .lama import LaMa, AnimeLaMa
 from .ldm import LDM
 from .mat import MAT
@@ -10,5 +11,6 @@ models = {
     LDM.name: LDM,
     ZITS.name: ZITS,
     MAT.name: MAT,
+    FcF.name: FcF,
     OpenCV2.name: OpenCV2,
 }
