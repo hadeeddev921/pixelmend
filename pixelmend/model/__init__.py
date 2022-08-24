@@ -5,6 +5,7 @@ from .manga import Manga
 from .mat import MAT
 from .mi_gan import MIGAN
 from .opencv2 import OpenCV2
+from .sd import SD15, SD2, Anything4, RealisticVision14, SD
 from .zits import ZITS
 
 models = {
@@ -17,4 +18,8 @@ models = {
     OpenCV2.name: OpenCV2,
     Manga.name: Manga,
     MIGAN.name: MIGAN,
+    SD15.name: SD15,
+    Anything4.name: Anything4,
+    RealisticVision14.name: RealisticVision14,
+    SD2.name: SD2,
 }
