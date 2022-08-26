@@ -5,6 +5,7 @@ from .manga import Manga
 from .mat import MAT
 from .mi_gan import MIGAN
 from .opencv2 import OpenCV2
+from .paint_by_example import PaintByExample
 from .sd import SD15, SD2, Anything4, RealisticVision14, SD
 from .sdxl import SDXL
 from .zits import ZITS
@@ -23,5 +24,6 @@ models = {
     Anything4.name: Anything4,
     RealisticVision14.name: RealisticVision14,
     SD2.name: SD2,
+    PaintByExample.name: PaintByExample,
     SDXL.name: SDXL,
 }
