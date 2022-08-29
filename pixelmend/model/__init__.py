@@ -1,3 +1,4 @@
+from .controlnet import ControlNet
 from .fcf import FcF
 from .instruct_pix2pix import InstructPix2Pix
 from .kandinsky import Kandinsky22
