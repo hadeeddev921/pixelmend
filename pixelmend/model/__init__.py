@@ -1,4 +1,5 @@
 from .fcf import FcF
+from .instruct_pix2pix import InstructPix2Pix
 from .lama import LaMa, AnimeLaMa
 from .ldm import LDM
 from .manga import Manga
@@ -25,5 +26,6 @@ models = {
     RealisticVision14.name: RealisticVision14,
     SD2.name: SD2,
     PaintByExample.name: PaintByExample,
+    InstructPix2Pix.name: InstructPix2Pix,
     SDXL.name: SDXL,
 }
