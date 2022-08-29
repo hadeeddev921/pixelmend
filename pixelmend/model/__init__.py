@@ -1,5 +1,6 @@
 from .fcf import FcF
 from .instruct_pix2pix import InstructPix2Pix
+from .kandinsky import Kandinsky22
 from .lama import LaMa, AnimeLaMa
 from .ldm import LDM
 from .manga import Manga
@@ -27,5 +28,6 @@ models = {
     SD2.name: SD2,
     PaintByExample.name: PaintByExample,
     InstructPix2Pix.name: InstructPix2Pix,
+    Kandinsky22.name: Kandinsky22,
     SDXL.name: SDXL,
 }
