@@ -12,12 +12,16 @@ Features so far:
 
 - **Object removal** with fast, dedicated inpainting models: LaMa, Anime-LaMa, MAT, FcF,
   ZITS, MI-GAN, Manga, LDM and OpenCV.
+- **Prompt-guided editing** with Stable Diffusion 1.5/2, SDXL, Kandinsky 2.2,
+  Paint by Example, InstructPix2Pix, BrushNet, PowerPaint (v1/v2), ControlNet and AnyText
+  (text rendering).
 - **High-resolution strategies**: process large images at original size, resized, or
   cropped around the mask.
 
 ## Status
 
-Early development. The model backend is being built first; the web editor will follow.
+Early development. The model backend is being built first; the server, CLI and web
+editor will follow.
 
 ## License
 
