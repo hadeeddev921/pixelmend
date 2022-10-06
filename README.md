@@ -17,11 +17,39 @@ Features so far:
   (text rendering).
 - **High-resolution strategies**: process large images at original size, resized, or
   cropped around the mask.
+- **Plugins**: interactive segmentation (Segment Anything / SAM 2 / MobileSAM), background
+  removal (RMBG / rembg), anime segmentation, Real-ESRGAN upscaling and GFPGAN /
+  RestoreFormer face restoration.
+- **REST API** (FastAPI + Socket.IO) for inpainting, model switching and plugins.
+- **Batch processing** from the command line for whole folders of images and masks.
+- **Web config page** (Gradio) for building a server configuration file without editing JSON.
 
-## Status
+## How to Run This Project
 
-Early development. The model backend is being built first; the server, CLI and web
-editor will follow.
+1. Install Python 3.10, then clone and install:
+
+   ```bash
+   git clone https://github.com/hadeeddev921/pixelmend.git
+   cd pixelmend
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   pip install -e .
+   ```
+
+2. Start the API server:
+
+   ```bash
+   pixelmend start --model lama --device cpu --port 8080
+   ```
+
+3. Or batch-process a folder:
+
+   ```bash
+   pixelmend run --model lama --device cpu --image ./images --mask ./masks --output ./output
+   ```
+
+The browser editor is under development.
 
 ## License
 
