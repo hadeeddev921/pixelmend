@@ -25,6 +25,8 @@ Main features:
   RestoreFormer face restoration.
 - **File manager**: browse a folder of input images, masks and saved outputs from the UI.
 - **Batch processing** from the command line for whole folders of images and masks.
+- **Bulk watermark removal** script that sends a dataset of images through the running
+  server.
 - **Web config page** (Gradio) for building a server configuration file without editing JSON.
 
 ## How It Works
@@ -88,15 +90,21 @@ pixelmend/
 │   │   ├── power_paint/        # PowerPaint v1 and v2
 │   │   ├── helper/             # ControlNet preprocessors and CPU text encoder
 │   │   └── original_sd_configs/# Stable Diffusion YAML configs for single-file models
-│   └── plugins/                # Segmentation, background removal, upscaling, face restoration
+│   ├── plugins/                # Segmentation, background removal, upscaling, face restoration
+│   └── tests/                  # Pytest suite and test images
 ├── web_app/                    # React + TypeScript frontend (Vite, Tailwind, shadcn/ui)
 │   ├── src/components/         # Editor, side panel, file manager, plugins, settings UI
 │   ├── src/lib/                # API client, Zustand store, types and constants
 │   └── src/hooks/              # Reusable React hooks (hotkeys, images, resolution)
+├── docker/                     # CPU and GPU Dockerfiles
+├── scripts/                    # Windows one-click installer packaging and conversion tools
+├── assets/                     # Before/after example images
 ├── main.py                     # Run the CLI from source: `python main.py start ...`
+├── watermark-remover.py        # Bulk watermark removal through the running server
+├── build_docker.sh             # Builds the CPU and GPU Docker images
 ├── setup.py                    # Package metadata and `pixelmend` console script
 ├── requirements.txt            # Runtime Python dependencies
-└── requirements-dev.txt        # Packaging and development dependencies
+└── requirements-dev.txt        # Packaging and test dependencies
 ```
 
 ## Tech Stack
@@ -115,11 +123,13 @@ pixelmend/
 | Frontend | React 18, TypeScript 5, Vite 5 | Single-page editor |
 | UI | Tailwind CSS 3, shadcn/ui (Radix UI) | Components and styling |
 | State and data | Zustand 4, TanStack Query 5, Axios, socket.io-client 4 | Client state, API calls and progress updates |
+| Testing | pytest (via pytest-loguru) | Backend model and plugin tests |
+| Deployment | Docker (CPU and NVIDIA GPU images) | Containerised runs |
 
 ## How to Run This Project
 
 1. **Prerequisites**
-   - Python 3.10 (the dependency pins target it)
+   - Python 3.10 (used by the Docker images; the dependency pins target it)
    - Node.js 18 or newer and npm (to build the web app)
    - Git
    - Optional: an NVIDIA GPU with CUDA, or an Apple Silicon Mac, for faster diffusion models
@@ -188,6 +198,13 @@ pixelmend/
    pixelmend run --model lama --device cpu --image ./images --mask ./masks --output ./output
    ```
 
+   Remove watermarks from a dataset (with the server running, after setting the folder
+   paths in `main()`):
+
+   ```bash
+   python watermark-remover.py
+   ```
+
    For frontend development, run the backend as above, then:
 
    ```bash
@@ -196,6 +213,29 @@ pixelmend/
    npm run dev
    ```
 
+8. **Run tests** (tests download the models they use):
+
+   ```bash
+   pip install -r requirements-dev.txt
+   pytest pixelmend/tests
+   ```
+
+9. **Docker**: the Dockerfiles in `docker/` copy the project into the image and install
+   it from source, and `build_docker.sh` builds both images (CPU and NVIDIA GPU) tagged
+   with the version you pass. Build the web app first (step 4) so it is included:
+
+   ```bash
+   bash build_docker.sh <version>
+   docker run -p 8080:8080 hadeeddev921/pixelmend:cpu-<version> \
+     pixelmend start --model lama --device cpu --host 0.0.0.0 --port 8080
+   ```
+
 ## License
 
 Licensed under the Apache License 2.0. See [LICENSE](LICENSE).
+
+## Acknowledgements
+
+PixelMend is based on the open-source [IOPaint](https://github.com/Sanster/IOPaint) project
+by Sanster, released under the Apache License 2.0, and uses model weights published by the
+authors of the models listed above.
